@@ -15,7 +15,7 @@ public class HelloApplication extends Application {
 
         // Read inventory file when the application starts
         InventoryFileHandler inventoryFileHandler = new InventoryFileHandler();
-        inventoryFileHandler.readInventoryFile();
+        inventoryFileHandler.loadInventory();
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
