@@ -9,7 +9,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class DealerParser {
-    public static ArrayList<Dealer> LoadDealers(String filePath){
+    public static ArrayList<Dealer> loadDealers(String filePath){
         ArrayList<Dealer> dealers=new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))){
