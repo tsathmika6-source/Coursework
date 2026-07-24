@@ -36,6 +36,7 @@ public class InventoryParser {
     private static Part parseLine(String line) {
         line=line.replace("|",",");
         line=line.replace(";",",");
+        line = line.replace(":", ",");
 
         String[] data=line.split(",");
 
