@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.control.ComboBox;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -47,6 +48,9 @@ public  class  DashboardController implements Initializable {
     @FXML
     private TextField keywordField;
 
+    @FXML
+    private ComboBox<String> categoryComboBox;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -63,6 +67,15 @@ public  class  DashboardController implements Initializable {
                 InventoryParser.loadInventory("src/main/resources/com/example/malabespareparts/Data/inventory_legacy.txt");
 
         partList = FXCollections.observableArrayList(parts);
+        categoryComboBox.getItems().addAll(
+                "ALL",
+                "ENGINE",
+                "BREAKS",
+                "ELECTRICAL",
+                "BODYWORK"
+        );
+        categoryComboBox.setValue("All");
+
         FilteredList<Part> filteredList = new FilteredList<>(partList, p -> true);
         keywordField.textProperty().addListener((observable, oldValue, newValue) -> {
 

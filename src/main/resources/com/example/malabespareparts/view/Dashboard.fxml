@@ -53,9 +53,9 @@
                         <Label text="Keyword Search" />
                         <TextField fx:id="keywordField"
                                    prefHeight="25.0"
-                                   prefWidth="129.0"
+                                   prefWidth="129.0"/>
                         <Label text="Category" />
-                        <ComboBox prefHeight="25.0" prefWidth="131.0" />
+                        <ComboBox fx:id="categoryComboBox" prefHeight="25.0" prefWidth="131.0" />
                         <Label text="Min Price" />
                         <TextField prefHeight="25.0" prefWidth="119.0" />
                         <Label text="Max Price" />
