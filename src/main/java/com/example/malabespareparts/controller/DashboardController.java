@@ -51,6 +51,12 @@ public  class  DashboardController implements Initializable {
     @FXML
     private ComboBox<String> categoryComboBox;
 
+    @FXML
+    private TextField minPriceField;
+
+    @FXML
+    private TextField maxPriceField;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -74,23 +80,46 @@ public  class  DashboardController implements Initializable {
                 "ELECTRICAL",
                 "BODYWORK"
         );
-        categoryComboBox.setValue("All");
+        categoryComboBox.setValue("ALL");
 
         FilteredList<Part> filteredList = new FilteredList<>(partList, p -> true);
         keywordField.textProperty().addListener((observable, oldValue, newValue) -> {
-
             String keyword = newValue.toLowerCase().trim();
             filteredList.setPredicate(part -> {
-                if (keyword.isEmpty()) {
-                    return true;
-                }
+                String selectedCategory = categoryComboBox.getValue();
 
-                return part.getPartCode().toLowerCase().contains(keyword)
+                boolean matchesKeyword = keyword.isEmpty()
+                        || part.getPartCode().toLowerCase().contains(keyword)
                         || part.getName().toLowerCase().contains(keyword)
                         || part.getBrand().toLowerCase().contains(keyword)
                         || part.getCategory().toLowerCase().contains(keyword);
+
+                boolean matchesCategory = selectedCategory.equals("ALL")
+                        || part.getCategory().equalsIgnoreCase(selectedCategory);
+
+                return matchesKeyword && matchesCategory;
+
             });
         });
+
+        categoryComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            String keyword = keywordField.getText().toLowerCase().trim();
+
+            filteredList.setPredicate(part -> {
+
+                boolean matchesKeyword = keyword.isEmpty()
+                        || part.getPartCode().toLowerCase().contains(keyword)
+                        || part.getName().toLowerCase().contains(keyword)
+                        || part.getBrand().toLowerCase().contains(keyword)
+                        || part.getCategory().toLowerCase().contains(keyword);
+
+                boolean matchesCategory = newValue.equals("ALL")
+                        || part.getCategory().equalsIgnoreCase(newValue);
+
+                return matchesKeyword && matchesCategory;
+            });
+        });
+
         inventoryTable.setItems(filteredList);
-    }
+        }
 }

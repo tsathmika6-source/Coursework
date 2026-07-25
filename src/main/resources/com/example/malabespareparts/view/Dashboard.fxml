@@ -57,9 +57,9 @@
                         <Label text="Category" />
                         <ComboBox fx:id="categoryComboBox" prefHeight="25.0" prefWidth="131.0" />
                         <Label text="Min Price" />
-                        <TextField prefHeight="25.0" prefWidth="119.0" />
+                        <TextField fx:id="minPriceField" prefHeight="25.0" prefWidth="119.0" />
                         <Label text="Max Price" />
-                        <TextField prefHeight="25.0" prefWidth="132.0" />
+                        <TextField fx:id="maxPriceField" prefHeight="25.0" prefWidth="132.0" />
                      </children>
                   </HBox>
                   <TableView fx:id="inventoryTable" prefHeight="200.0" prefWidth="730.0">
