@@ -121,5 +121,37 @@ public  class  DashboardController implements Initializable {
         });
 
         inventoryTable.setItems(filteredList);
-        }
+
+        minPriceField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String keyword = keywordField.getText().toLowerCase().trim();
+            String selectedCategory = categoryComboBox.getValue();
+
+            double minPrice = 0;
+
+            if (!newValue.isEmpty()) {
+                try {
+                    minPrice = Double.parseDouble(newValue);
+                } catch (NumberFormatException e) {
+                    return;
+                }
+            }
+
+            double finalMinPrice = minPrice;
+
+            filteredList.setPredicate(part -> {
+                boolean matchesKeyword = keyword.isEmpty()
+                        || part.getPartCode().toLowerCase().contains(keyword)
+                        || part.getName().toLowerCase().contains(keyword)
+                        || part.getBrand().toLowerCase().contains(keyword)
+                        || part.getCategory().toLowerCase().contains(keyword);
+
+                boolean matchesCategory = selectedCategory.equals("ALL")
+                        || part.getCategory().equalsIgnoreCase(selectedCategory);
+
+                boolean matchesPrice = part.getPrice() >= finalMinPrice;
+
+                return matchesKeyword && matchesCategory && matchesPrice;
+            });
+        });
+    }
 }
