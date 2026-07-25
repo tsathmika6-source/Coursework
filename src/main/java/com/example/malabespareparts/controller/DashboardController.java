@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,13 +35,23 @@ public  class  DashboardController implements Initializable {
     private TableColumn<Part, Integer> qtyColumn;
 
     @FXML
-    private TableColumn<Part, Integer> categoryColumn;
+    private TableColumn<Part, String> categoryColumn;
 
     @FXML
-    private TableColumn<Part, Integer> lastUpdatedColumn;
+    private TableColumn<Part, String> lastUpdatedColumn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        partCodeColumn.setCellValueFactory(new PropertyValueFactory<>("partCode"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        qtyColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+        lastUpdatedColumn.setCellValueFactory(new PropertyValueFactory<>("lastUpdated"));
+
+
         ArrayList<Part> parts=
                 InventoryParser.loadInventory("src/main/resources/com/example/malabespareparts/Data/inventory_legacy.txt");
 
