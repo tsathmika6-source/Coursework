@@ -9,12 +9,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TextField;
+import javafx.collections.transformation.FilteredList;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public  class  DashboardController implements Initializable {
+
+    private ObservableList<Part> partList;
 
     @FXML
     private TableView<Part> inventoryTable;
@@ -40,6 +44,9 @@ public  class  DashboardController implements Initializable {
     @FXML
     private TableColumn<Part, String> lastUpdatedColumn;
 
+    @FXML
+    private TextField keywordField;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -52,11 +59,25 @@ public  class  DashboardController implements Initializable {
         lastUpdatedColumn.setCellValueFactory(new PropertyValueFactory<>("lastUpdated"));
 
 
-        ArrayList<Part> parts=
+        ArrayList<Part> parts =
                 InventoryParser.loadInventory("src/main/resources/com/example/malabespareparts/Data/inventory_legacy.txt");
 
-        ObservableList<Part> list = FXCollections.observableArrayList(parts);
+        partList = FXCollections.observableArrayList(parts);
+        FilteredList<Part> filteredList = new FilteredList<>(partList, p -> true);
+        keywordField.textProperty().addListener((observable, oldValue, newValue) -> {
 
-        inventoryTable.setItems(list);
+            String keyword = newValue.toLowerCase().trim();
+            filteredList.setPredicate(part -> {
+                if (keyword.isEmpty()) {
+                    return true;
+                }
+
+                return part.getPartCode().toLowerCase().contains(keyword)
+                        || part.getName().toLowerCase().contains(keyword)
+                        || part.getBrand().toLowerCase().contains(keyword)
+                        || part.getCategory().toLowerCase().contains(keyword);
+            });
+        });
+        inventoryTable.setItems(filteredList);
     }
 }
