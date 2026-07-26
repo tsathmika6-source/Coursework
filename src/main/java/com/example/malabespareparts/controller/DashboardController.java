@@ -57,6 +57,57 @@ public  class  DashboardController implements Initializable {
     @FXML
     private TextField maxPriceField;
 
+    @FXML
+    private TextField partCodeField;
+
+    @FXML
+    private TextField descriptionField;
+
+    @FXML
+    private TextField brandField;
+
+    @FXML
+    private TextField priceField;
+
+    @FXML
+    private TextField quantityField;
+
+    @FXML
+    private ComboBox<String> newCategoryComboBox;
+
+    @FXML
+    private TextField lastUpdatedField;
+
+    @FXML
+    public void addPart() {
+        try{
+            Part part=new Part(
+                    partCodeField.getText(),
+                    descriptionField.getText(),
+                    brandField.getText(),
+                    Double.parseDouble(priceField.getText()),
+                    Integer.parseInt(quantityField.getText()),
+                    newCategoryComboBox.getValue(),
+                    lastUpdatedField.getText(),
+                    ""
+            );
+
+            partList.add(part);
+
+            partCodeField.clear();
+            descriptionField.clear();
+            brandField.clear();
+            priceField.clear();
+            quantityField.clear();
+            lastUpdatedField.clear();
+            newCategoryComboBox.setValue(null);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -77,6 +128,13 @@ public  class  DashboardController implements Initializable {
                 "ALL",
                 "ENGINE",
                 "BREAKS",
+                "ELECTRICAL",
+                "BODYWORK"
+        );
+
+        newCategoryComboBox.getItems().addAll(
+                "ENGINE",
+                "BRAKES",
                 "ELECTRICAL",
                 "BODYWORK"
         );
