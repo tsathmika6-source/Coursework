@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.ComboBox;
+import com.example.malabespareparts.filehandler.InventoryFileHandler;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -93,6 +94,11 @@ public  class  DashboardController implements Initializable {
             );
 
             partList.add(part);
+
+            InventoryFileHandler.saveInventory(
+                    "src/main/resources/com/example/malabespareparts/Data/inventory_legacy.txt",
+                    partList
+            );
 
             partCodeField.clear();
             descriptionField.clear();
@@ -179,6 +185,18 @@ public  class  DashboardController implements Initializable {
         });
 
         inventoryTable.setItems(filteredList);
+
+        inventoryTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedPart) -> {
+            if (selectedPart !=null){
+                partCodeField.setText(selectedPart.getPartCode());
+                descriptionField.setText(selectedPart.getName());
+                brandField.setText(selectedPart.getBrand());
+                priceField.setText(String.valueOf(selectedPart.getPrice()));
+                quantityField.setText(String.valueOf(selectedPart.getQuantity()));
+                newCategoryComboBox.setValue(selectedPart.getCategory());
+                lastUpdatedField.setText(selectedPart.getLastUpdated());
+            }
+        });
 
         minPriceField.textProperty().addListener((observable, oldValue, newValue) -> {
 
