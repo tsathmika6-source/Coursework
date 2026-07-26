@@ -73,7 +73,20 @@
                         <TableColumn fx:id="lastUpdatedColumn" prefWidth="100.0" text="Last Updated" />
                      </columns>
                   </TableView>
-                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <HBox spacing="10">
+                     <TextField fx:id="partCodeField" promptText="Part Code"/>
+                     <TextField fx:id="descriptionField" promptText="Description"/>
+                     <TextField fx:id="brandField" promptText="Brand"/>
+                     <TextField fx:id="priceField" promptText="Price"/>
+                     <TextField fx:id="quantityField" promptText="Quantity"/>
+                     <ComboBox fx:id="newCategoryComboBox" promptText="Category"/>
+                     <TextField fx:id="lastUpdatedField" promptText="Last Updated"/>
+                     <Button
+                             text="Add Part"
+                             onAction="#addPart"/>
+                  </HBox>
+
+
                </children>
             </VBox>
          </center>

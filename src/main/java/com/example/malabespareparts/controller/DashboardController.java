@@ -123,6 +123,7 @@ public  class  DashboardController implements Initializable {
         inventoryTable.setItems(filteredList);
 
         minPriceField.textProperty().addListener((observable, oldValue, newValue) -> {
+
             String keyword = keywordField.getText().toLowerCase().trim();
             String selectedCategory = categoryComboBox.getValue();
 
@@ -136,7 +137,62 @@ public  class  DashboardController implements Initializable {
                 }
             }
 
+            double maxPrice = Double.MAX_VALUE;
+
+            if (!maxPriceField.getText().isEmpty()) {
+                try {
+                    maxPrice = Double.parseDouble(maxPriceField.getText());
+                } catch (NumberFormatException e) {
+                    return;
+                }
+            }
+
             double finalMinPrice = minPrice;
+            double finalMaxPrice = maxPrice;
+
+            filteredList.setPredicate(part -> {
+
+                boolean matchesKeyword = keyword.isEmpty()
+                        || part.getPartCode().toLowerCase().contains(keyword)
+                        || part.getName().toLowerCase().contains(keyword)
+                        || part.getBrand().toLowerCase().contains(keyword)
+                        || part.getCategory().toLowerCase().contains(keyword);
+
+                boolean matchesCategory = selectedCategory.equals("ALL")
+                        || part.getCategory().equalsIgnoreCase(selectedCategory);
+
+                boolean matchesPrice = part.getPrice() >= finalMinPrice
+                        && part.getPrice() <= finalMaxPrice;
+
+                return matchesKeyword && matchesCategory && matchesPrice;
+            });
+        });
+
+        maxPriceField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String keyword = keywordField.getText().toLowerCase().trim();
+            String selectedCategory = categoryComboBox.getValue();
+
+            double minPrice = 0;
+
+            if (!minPriceField.getText().isEmpty()) {
+                try {
+                    minPrice = Double.parseDouble(minPriceField.getText());
+                } catch (NumberFormatException e) {
+                    return;
+                }
+            }
+
+            double maxPrice = Double.MAX_VALUE;
+
+            if (!newValue.isEmpty()) {
+                try {
+                    maxPrice = Double.parseDouble(newValue);
+                } catch (NumberFormatException e) {
+                    return;
+                }
+            }
+            double finalMinPrice = minPrice;
+            double finalMaxPrice = maxPrice;
 
             filteredList.setPredicate(part -> {
                 boolean matchesKeyword = keyword.isEmpty()
@@ -148,10 +204,12 @@ public  class  DashboardController implements Initializable {
                 boolean matchesCategory = selectedCategory.equals("ALL")
                         || part.getCategory().equalsIgnoreCase(selectedCategory);
 
-                boolean matchesPrice = part.getPrice() >= finalMinPrice;
+                boolean matchesPrice = part.getPrice() >= finalMinPrice
+                        && part.getPrice() <= finalMaxPrice;
 
                 return matchesKeyword && matchesCategory && matchesPrice;
             });
         });
+
     }
 }
