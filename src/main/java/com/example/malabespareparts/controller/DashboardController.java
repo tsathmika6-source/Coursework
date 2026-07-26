@@ -114,6 +114,16 @@ public  class  DashboardController implements Initializable {
 
     }
 
+    @FXML
+    public void updatePart() {
+
+    }
+
+    @FXML
+    public void deletePart() {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
