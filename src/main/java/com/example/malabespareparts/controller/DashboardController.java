@@ -180,6 +180,28 @@ public  class  DashboardController implements Initializable {
         }
     }
 
+    @FXML
+    public void openPOSCheckout(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(
+                            "/com/example/malabespareparts/view/POSCheckout.fxml"));
+
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("POS Checkout");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

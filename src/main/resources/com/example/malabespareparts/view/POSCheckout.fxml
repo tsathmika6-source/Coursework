@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.malabespareparts.controller.POSCheckoutController"
+            prefHeight="650.0"
+            prefWidth="1100.0">
+
+    <top>
+        <Label text="POS Checkout"
+               style="-fx-font-size:24px; -fx-font-weight:bold;">
+            <BorderPane.margin>
+                <Insets top="15" bottom="15" left="20"/>
+            </BorderPane.margin>
+        </Label>
+    </top>
+
+    <center>
+        <HBox spacing="20">
+
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+
+            <!-- Inventory -->
+
+            <VBox spacing="10" prefWidth="520">
+
+                <Label text="Inventory"/>
+
+                <TableView fx:id="inventoryTable" prefHeight="450">
+
+                    <columns>
+
+                        <TableColumn fx:id="partCodeColumn"
+                                     text="Part Code"
+                                     prefWidth="80"/>
+
+                        <TableColumn fx:id="nameColumn"
+                                     text="Description"
+                                     prefWidth="170"/>
+
+                        <TableColumn fx:id="priceColumn"
+                                     text="Price"
+                                     prefWidth="80"/>
+
+                        <TableColumn fx:id="stockColumn"
+                                     text="Stock"
+                                     prefWidth="70"/>
+
+                        <TableColumn fx:id="categoryColumn"
+                                     text="Category"
+                                     prefWidth="110"/>
+
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+            <!-- Cart -->
+
+            <VBox spacing="10" prefWidth="520">
+
+                <Label text="Shopping Cart"/>
+
+                <TableView fx:id="cartTable" prefHeight="450">
+
+                    <columns>
+
+                        <TableColumn fx:id="cartNameColumn"
+                                     text="Part"
+                                     prefWidth="220"/>
+
+                        <TableColumn fx:id="cartQuantityColumn"
+                                     text="Quantity"
+                                     prefWidth="100"/>
+
+                        <TableColumn fx:id="cartSubtotalColumn"
+                                     text="Subtotal"
+                                     prefWidth="150"/>
+
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+        </HBox>
+    </center>
+
+    <bottom>
+
+        <HBox spacing="15">
+
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+
+            <Label text="Quantity"/>
+
+            <TextField fx:id="quantityField"
+                       promptText="Enter quantity"
+                       prefWidth="100"/>
+
+            <Button fx:id="addToCartButton"
+                    text="Add To Cart"
+                    onAction="#addToCart"/>
+
+            <Button fx:id="checkoutButton"
+                    text="Checkout"
+                    onAction="#checkout"/>
+
+            <Label fx:id="totalLabel"
+                   text="Total : Rs. 0.00"
+                   style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+
+        </HBox>
+
+    </bottom>
+
+</BorderPane>

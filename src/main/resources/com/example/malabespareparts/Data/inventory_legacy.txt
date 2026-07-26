@@ -1,5 +1,5 @@
-P001,Bajaj 4-Stroke Piston,Bajaj,5000.0,15,ENGINE,2023-10-12,piston4s.jpg
-P002,TVS King Brake Pad,TVS,1250.0,8,BRAKES,12/05/2023,brakepad.png
+P001,Bajaj 4-Stroke Piston,Bajaj,5000.0,10,ENGINE,2023-10-12,piston4s.jpg
+P002,TVS King Brake Pad,TVS,1250.0,6,BRAKES,12/05/2023,brakepad.png
 P003,205/50-10 Tyre,,6500.0,24,BODYWORK,Oct 15,2023
 P004,Spark Plug NGK,NGK,850.0,50,ELECTRICAL,2024-01-05,spark.jpg
 P005,Clutch Cable Bajaj RE,Bajaj,950.0,12,ENGINE,01-02-2024,cl_cable.jpg
