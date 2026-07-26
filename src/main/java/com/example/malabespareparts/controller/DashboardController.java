@@ -117,10 +117,42 @@ public  class  DashboardController implements Initializable {
     @FXML
     public void updatePart() {
 
+        Part selectedPart=inventoryTable.getSelectionModel().getSelectedItem();
+
+        if (selectedPart == null){
+            return;
+        }
+
+        selectedPart.setPartCode(partCodeField.getText());
+        selectedPart.setName(descriptionField.getText());
+        selectedPart.setBrand(brandField.getText());
+        selectedPart.setPrice(Double.parseDouble(priceField.getText()));
+        selectedPart.setQuantity(Integer.parseInt(quantityField.getText()));
+        selectedPart.setCategory(newCategoryComboBox.getValue());
+        selectedPart.setLastUpdated(lastUpdatedField.getText());
+
+        inventoryTable.refresh();
+
+        InventoryFileHandler.saveInventory(
+                "src/main/resources/com/example/malabespareparts/Data/inventory_legacy.txt",
+                partList
+        );
     }
 
     @FXML
     public void deletePart() {
+        Part selectedPart=inventoryTable.getSelectionModel().getSelectedItem();
+
+        if (selectedPart == null){
+            return;
+        }
+
+        partList.remove(selectedPart);
+
+        InventoryFileHandler.saveInventory(
+                "src/main/resources/com/example/malabespareparts/Data/inventory_legacy.txt",
+                partList
+        );
 
     }
 
