@@ -5,7 +5,6 @@ import com.example.malabespareparts.model.Dealer;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class DealerParser {
@@ -40,7 +39,7 @@ public class DealerParser {
 
         String[] data = line.split(",");
 
-        if (data.length<5) {
+        if (data.length<4) {
             return  null;
         }
 
@@ -48,8 +47,7 @@ public class DealerParser {
                 data[0].trim(),
                 data[1].trim(),
                 data[2].trim(),
-                data[3].trim(),
-                data[4].trim()
+                data[3].trim()
         );
     }
 }

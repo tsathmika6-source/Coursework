@@ -25,7 +25,7 @@
                <children>
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Dashboard" />
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Inventory" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Dealers" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Dealers" onAction="#openDealers"/>
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="POS Checkout" />
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Audit Log" />
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Exit" />

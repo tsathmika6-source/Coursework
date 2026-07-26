@@ -13,6 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.ComboBox;
 import com.example.malabespareparts.filehandler.InventoryFileHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -117,6 +122,7 @@ public  class  DashboardController implements Initializable {
     @FXML
     public void updatePart() {
 
+
         Part selectedPart=inventoryTable.getSelectionModel().getSelectedItem();
 
         if (selectedPart == null){
@@ -154,6 +160,24 @@ public  class  DashboardController implements Initializable {
                 partList
         );
 
+    }
+
+    @FXML
+    public void openDealers(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/malabespareparts/view/Dealer.fxml"));
+
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Dealer Management");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

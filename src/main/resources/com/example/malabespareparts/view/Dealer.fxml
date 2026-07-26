@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.malabespareparts.controller.DealerController">
+
+    <top>
+        <Label text="Dealer Management"
+               style="-fx-font-size:24px; -fx-font-weight:bold;">
+            <BorderPane.margin>
+                <Insets top="15" bottom="15" left="20"/>
+            </BorderPane.margin>
+        </Label>
+    </top>
+
+    <center>
+        <VBox spacing="15" alignment="CENTER">
+
+            <TableView fx:id="dealerTable" prefHeight="400" prefWidth="700">
+                <columns>
+
+                    <TableColumn fx:id="dealerIdColumn"
+                                 text="Dealer ID"
+                                 prefWidth="120"/>
+
+                    <TableColumn fx:id="dealerNameColumn"
+                                 text="Dealer Name"
+                                 prefWidth="240"/>
+
+                    <TableColumn fx:id="contactNumberColumn"
+                                 text="Contact Number"
+                                 prefWidth="170"/>
+
+                    <TableColumn fx:id="addressColumn"
+                                 text="Location"
+                                 prefWidth="170"/>
+
+                </columns>
+
+            </TableView>
+
+            <Button text="Select Random Dealers"
+                    onAction="#selectRandomDealers"
+                    prefWidth="220"
+                    prefHeight="40"/>
+
+        </VBox>
+    </center>
+
+</BorderPane>

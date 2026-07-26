@@ -6,19 +6,17 @@ public class Dealer {
     private String dealerName;
     private String contactNumber;
     private String address;
-    private String email;
 
     public Dealer() {
     }
 
     public Dealer(String dealerId, String dealerName, String contactNumber,
-                  String address, String email) {
+                  String address) {
 
         this.dealerId = dealerId;
         this.dealerName = dealerName;
         this.contactNumber = contactNumber;
         this.address = address;
-        this.email = email;
     }
 
     public String getDealerId() {return dealerId;}
@@ -37,14 +35,10 @@ public class Dealer {
 
     public  void setAddress(String address) {this.address=address;}
 
-    public  String getEmail(){return email;}
-
-    public  void setEmail(String email){this.email=email;}
-
     @Override
     public String toString() {
         return dealerId + "," + dealerName + "," +
-                contactNumber + "," + address + "," + email;
+                contactNumber + "," + address;
     }
 }
 
