@@ -27,8 +27,10 @@
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Inventory" />
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Dealers" onAction="#openDealers"/>
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="POS Checkout" onAction="#openPOSCheckout" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Audit Log"/>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Exit" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Audit Log"   onAction="#openAuditLog"/>
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Exit" onAction="#exitApplication"/>
+
+                   <Button text="Low Stock" onAction="#showLowStock"/>
                </children>
             </VBox>
          </left>
@@ -62,7 +64,8 @@
                         <TextField fx:id="minPriceField" prefHeight="25.0" prefWidth="119.0" />
                         <Label text="Max Price" />
                         <TextField fx:id="maxPriceField" prefHeight="25.0" prefWidth="132.0" />
-                         <Button text="Low Stock" onAction="#showLowStock"/>
+                         <Button text="Search" onAction="#searchInventory"/>
+                         <Button text="Reset" onAction="#resetInventory"/>
                      </children>
                   </HBox>
                   <SplitPane dividerPositions="0.7" prefHeight="332.0" prefWidth="730.0">

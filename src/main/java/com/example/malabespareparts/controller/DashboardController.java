@@ -200,9 +200,107 @@ public  class  DashboardController implements Initializable {
         }
     }
 
+    @FXML
+    public void showLowStock() {
 
+        ObservableList<Part> lowStockList = FXCollections.observableArrayList();
 
-    @Override
+        for (Part part : partList) {
+
+            if (part.getQuantity() <= 5) {
+                lowStockList.add(part);
+            }
+        }
+
+        inventoryTable.setItems(lowStockList);
+    }
+
+    @FXML
+    public void searchInventory() {
+
+        String keyword = keywordField.getText().toLowerCase().trim();
+        String category = categoryComboBox.getValue();
+
+        double minPrice = 0;
+        double maxPrice = Double.MAX_VALUE;
+
+        try {
+            if (!minPriceField.getText().isEmpty()) {
+                minPrice = Double.parseDouble(minPriceField.getText());
+            }
+
+            if (!maxPriceField.getText().isEmpty()) {
+                maxPrice = Double.parseDouble(maxPriceField.getText());
+            }
+        } catch (NumberFormatException e) {
+            return;
+        }
+
+        ObservableList<Part> results = FXCollections.observableArrayList();
+
+        for (Part part : partList) {
+
+            boolean matchesKeyword =
+                    keyword.isEmpty()
+                            || part.getPartCode().toLowerCase().contains(keyword)
+                            || part.getName().toLowerCase().contains(keyword)
+                            || part.getBrand().toLowerCase().contains(keyword)
+                            || part.getCategory().toLowerCase().contains(keyword);
+
+            boolean matchesCategory =
+                    category.equals("ALL")
+                            || part.getCategory().equalsIgnoreCase(category);
+
+            boolean matchesPrice =
+                    part.getPrice() >= minPrice
+                            && part.getPrice() <= maxPrice;
+
+            if (matchesKeyword && matchesCategory && matchesPrice) {
+                results.add(part);
+            }
+        }
+
+        inventoryTable.setItems(results);
+    }
+
+    @FXML
+    public void resetInventory() {
+
+        keywordField.clear();
+        minPriceField.clear();
+        maxPriceField.clear();
+        categoryComboBox.setValue("ALL");
+
+        inventoryTable.setItems(partList);
+    }
+
+    @FXML
+    public void exitApplication() {
+
+        System.exit(0);
+
+    }
+
+    @FXML
+    public void openAuditLog() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/malabespareparts/view/AuditLog.fxml"));
+
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Audit Log");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+            @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         partCodeColumn.setCellValueFactory(new PropertyValueFactory<>("partCode"));

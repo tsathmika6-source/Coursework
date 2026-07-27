@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.malabespareparts.controller.AuditLogController">
+
+    <top>
+        <Label text="Audit Log"
+               style="-fx-font-size:22px; -fx-padding:15;"/>
+    </top>
+
+    <center>
+
+        <TableView fx:id="auditTable">
+
+            <columns>
+
+                <TableColumn fx:id="dateColumn"
+                             text="Date"
+                             prefWidth="120"/>
+
+                <TableColumn fx:id="timeColumn"
+                             text="Time"
+                             prefWidth="120"/>
+
+                <TableColumn fx:id="actionColumn"
+                             text="Action"
+                             prefWidth="320"/>
+
+                <TableColumn fx:id="userColumn"
+                             text="User"
+                             prefWidth="120"/>
+
+            </columns>
+
+        </TableView>
+
+    </center>
+
+</BorderPane>
