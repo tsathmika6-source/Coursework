@@ -28,10 +28,4 @@ public class CartItem {
     public String toString() {
         return part.getName() + " x " + quantity + " = " + getSubtotal();
     }
-
-
-
-
-
-
 }

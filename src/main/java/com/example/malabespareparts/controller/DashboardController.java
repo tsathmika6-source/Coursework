@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -86,8 +87,27 @@ public  class  DashboardController implements Initializable {
 
     @FXML
     public void addPart() {
-        try{
-            Part part=new Part(
+
+        // Check for empty fields
+        if (partCodeField.getText().trim().isEmpty() ||
+                descriptionField.getText().trim().isEmpty() ||
+                brandField.getText().trim().isEmpty() ||
+                priceField.getText().trim().isEmpty() ||
+                quantityField.getText().trim().isEmpty() ||
+                lastUpdatedField.getText().trim().isEmpty() ||
+                newCategoryComboBox.getValue() == null) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all required fields.");
+            alert.showAndWait();
+            return;
+        }
+
+        try {
+
+            Part part = new Part(
                     partCodeField.getText(),
                     descriptionField.getText(),
                     brandField.getText(),
@@ -105,6 +125,12 @@ public  class  DashboardController implements Initializable {
                     partList
             );
 
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Spare part added successfully.");
+            alert.showAndWait();
+
             partCodeField.clear();
             descriptionField.clear();
             brandField.clear();
@@ -113,10 +139,22 @@ public  class  DashboardController implements Initializable {
             lastUpdatedField.clear();
             newCategoryComboBox.setValue(null);
 
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        } catch (NumberFormatException e) {
 
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Price must be a decimal number and Quantity must be an integer.");
+            alert.showAndWait();
+
+        } catch (Exception e) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("An unexpected error occurred.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
